@@ -1,18 +1,14 @@
 //
-//  ContentView.swift
+//  RegisterView.swift
 //  msgFirebase
 //
-//  Created by Fernando Abdalla on 15/04/22.
+//  Created by Fernando Abdalla on 16/04/22.
 //
 
 import SwiftUI
 
-struct LoginView: View {
-    
-    @StateObject var viewModel = LoginViewModel()
-    
-    
-
+struct RegisterView: View {
+    @StateObject var viewModel = RegisterViewModel()
     
     var body: some View {
         VStack{
@@ -21,6 +17,19 @@ struct LoginView: View {
                 .scaledToFit()
                 .padding()
                 .cornerRadius(20.0)
+            
+            TextField("Nome", text: $viewModel.name)
+                .autocapitalization(.none)
+                .disableAutocorrection(false)
+                .padding()
+                .background(Color(UIColor.separator))
+                .cornerRadius(24.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 24.0)
+                        .strokeBorder(Color("GreenColor"),
+                        style: StrokeStyle(lineWidth: 2.0))
+                )
+                .padding(.bottom, 10)
             
             TextField("E-mail", text: $viewModel.email)
                 .autocapitalization(.none)
@@ -33,7 +42,6 @@ struct LoginView: View {
                         .strokeBorder(Color("GreenColor"),
                         style: StrokeStyle(lineWidth: 2.0))
                 )
-                
                 .padding(.bottom, 10)
             
             
@@ -49,7 +57,7 @@ struct LoginView: View {
                 .padding(.bottom, 10)
             
             Button(action: {
-                viewModel.Login()
+                viewModel.Register()
             }, label: {
                 Text("Entrar")
                     .frame(maxWidth: .infinity)
@@ -72,11 +80,10 @@ struct LoginView: View {
         .padding(.horizontal, 32)
         .background(Color.white)
     }
-      
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        RegisterView()
     }
 }
