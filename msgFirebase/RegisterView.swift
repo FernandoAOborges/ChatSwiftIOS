@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
     
@@ -56,6 +57,12 @@ struct RegisterView: View {
                 )
                 .padding(.bottom, 10)
             
+            
+            if viewModel.loading {
+                ProgressView()
+                    .padding()
+            }
+            
             Button(action: {
                 viewModel.Register()
             }, label: {
@@ -65,20 +72,17 @@ struct RegisterView: View {
                     .background(Color("GreenColor"))
                     .foregroundColor(Color.white)
                     .cornerRadius(24.0)
-            })
+            }).alert(isPresented: $viewModel.formInvalid){
+                Alert(title: Text(viewModel.alertText))
+            }
             
-            Divider()
-                .padding()
-            
-            Button(action: {
-                print("Entrar" )
-            }, label: {
-                Text("não tem uma conta? clique aqui.")
-            })
+    
+         
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, 32)
         .background(Color.white)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
